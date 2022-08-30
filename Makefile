@@ -1,10 +1,10 @@
 CPP = g++
 CFLAGS = -Wall -Wno-unused-function -std=c++11
-PROGRAMS = test_set_example
+PROGRAMS = test
 
 all: $(PROGRAMS)
 
-test_set_example: test_set_example.cpp
+test: test_set.cpp
 	$(CPP) $(CFLAGS) -o $@ $^
 
 clean:
