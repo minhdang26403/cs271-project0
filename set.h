@@ -22,8 +22,18 @@ class Set {
   /** Default constructor */
   Set() = default;
 
+  /** Copy constructor */
+  Set(const Set &other);
+
   /** Destructor */
   ~Set();
+
+  Set& operator=(const Set& src) {
+    Set copy(src);
+    copy.swap(*this);
+    return *this;
+  }
+
 
   /**
    * Precondition: None
@@ -104,7 +114,13 @@ class Set {
   std::string to_string();
 
  private:
+  void deep_copy(const Set& src);
+
+  void swap(const Set &rhs);
+
+  // The head of the linked list
   Node *head_{};
+  // The length of it
   std::size_t size_{};
 };
 
