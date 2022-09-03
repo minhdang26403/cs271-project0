@@ -41,6 +41,7 @@ void Set<ValueType>::remove(const ValueType &x) {
   }
 
   if (prev == nullptr) {
+    // The element we want to remove is the head
     head_ = head_->next_;
   } else {
     prev->next_ = node_to_delete->next_;
@@ -52,7 +53,7 @@ void Set<ValueType>::remove(const ValueType &x) {
 template <typename ValueType>
 bool Set<ValueType>::contains(const ValueType &x) const {
   Node *current = head_;
-  // Goes through each node to check if it contains the element `x`
+  // Goes through each node to check if it contains the element with value `x`
   while (current != nullptr) {
     if (current->value_ == x) {
       return true;
@@ -69,8 +70,7 @@ bool Set<ValueType>::operator==(const Set &t) const {
 }
 
 template <typename ValueType>
-bool Set<ValueType>::operator<=(const Set &t) const
-{
+bool Set<ValueType>::operator<=(const Set &t) const {
   Node *current = head_;
   // Goes through each element in the first set to make sure it 
   // exists in the second set

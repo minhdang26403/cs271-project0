@@ -104,7 +104,9 @@ class Set {
   std::string to_string();
 
  private:
+  // The head of the linked list
   Node *head_{};
+  // The length of it
   std::size_t size_{};
 };
 
