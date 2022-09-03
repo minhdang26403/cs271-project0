@@ -1,22 +1,27 @@
 #include "set.h"
-using namespace std;
 
 template<typename ValueType>
-Set<ValueType>::Set(const Set& src) {
+Set<ValueType>::Set(const Set &src) {
   deep_copy(src);
 }
-
 
 template<typename ValueType>
 Set<ValueType>::~Set() {
   Node *current = head_;
   Node *node_to_delete;
-  // Goes through each node and frees it
+  // Goes through each element of the Set and deletes it
   while (current != nullptr) {
     node_to_delete = current;
     current = current->next_;
     delete node_to_delete;
   }
+}
+
+template<typename ValueType>
+Set<ValueType>& Set<ValueType>::operator=(const Set &src) {
+  Set copy(src);
+  copy.swap(*this);
+  return *this;
 }
 
 template<typename ValueType>
@@ -100,6 +105,7 @@ Set<ValueType> Set<ValueType>::operator+(const Set &t) {
     t_element = t_element->next_;
   }
 
+  // assume `this` object is set `s`
   Node *s_element = head_;
   // Inserts all elements from set `s` (insert method will skip
   // duplicate values)
@@ -114,6 +120,7 @@ Set<ValueType> Set<ValueType>::operator+(const Set &t) {
 template<typename ValueType>
 Set<ValueType> Set<ValueType>::operator&(const Set &t) {
   Set<ValueType> result;
+  // assume `this` object is set `s`
   Node *s_element = head_;
   // Goes through each element in set `s` and inserts it into
   // the `result` set if it also exists in set `t`
