@@ -1,6 +1,12 @@
 #include "set.h"
 
 template<typename ValueType>
+Set<ValueType>::Set(const Set& src) {
+  deep_copy(src);
+}
+
+
+template<typename ValueType>
 Set<ValueType>::~Set() {
   Node *current = head_;
   Node *node_to_delete;
@@ -12,7 +18,7 @@ Set<ValueType>::~Set() {
   }
 }
 
-template <typename ValueType>
+template<typename ValueType>
 void Set<ValueType>::insert(const ValueType &x) {
   if (contains(x)) {
     return;
@@ -24,7 +30,7 @@ void Set<ValueType>::insert(const ValueType &x) {
   ++size_;
 }
 
-template <typename ValueType>
+template<typename ValueType>
 void Set<ValueType>::remove(const ValueType &x) {
   Node *prev = nullptr;
   Node *node_to_delete = head_;
@@ -50,7 +56,7 @@ void Set<ValueType>::remove(const ValueType &x) {
   --size_;
 }
 
-template <typename ValueType>
+template<typename ValueType>
 bool Set<ValueType>::contains(const ValueType &x) const {
   Node *current = head_;
   // Goes through each node to check if it contains the element with value `x`
@@ -63,13 +69,13 @@ bool Set<ValueType>::contains(const ValueType &x) const {
   return false;
 }
 
-template <typename ValueType>
+template<typename ValueType>
 bool Set<ValueType>::operator==(const Set &t) const {
   // two sets are equal if they are subsets of each other
   return *this <= t && t <= *this;
 }
 
-template <typename ValueType>
+template<typename ValueType>
 bool Set<ValueType>::operator<=(const Set &t) const {
   Node *current = head_;
   // Goes through each element in the first set to make sure it 
@@ -83,7 +89,7 @@ bool Set<ValueType>::operator<=(const Set &t) const {
   return true;
 }
 
-template <typename ValueType>
+template<typename ValueType>
 Set<ValueType> Set<ValueType>::operator+(const Set &t) {
   Set<ValueType> result;
   Node *t_element = t.begin();
@@ -104,7 +110,7 @@ Set<ValueType> Set<ValueType>::operator+(const Set &t) {
   return result;
 }
 
-template <typename ValueType>
+template<typename ValueType>
 Set<ValueType> Set<ValueType>::operator&(const Set &t) {
   Set<ValueType> result;
   Node *s_element = head_;
@@ -134,7 +140,7 @@ Set<ValueType> Set<ValueType>::operator-(const Set &t) {
   return result;
 }
 
-template <typename ValueType>
+template<typename ValueType>
 std::string Set<ValueType>::to_string() {
   Node *current = head_;
   if (current == nullptr) {
@@ -149,4 +155,29 @@ std::string Set<ValueType>::to_string() {
   }
   set_str << current->value_;
   return set_str.str();
+}
+
+template<typename ValueType>
+void Set<ValueType>::deep_copy(const Set &src) {
+  if (src.head_ == nullptr) {
+    // The source set is empty
+    head_ = nullptr;
+  } else {
+    Node *src_node = src.head_;
+    head_ = new Node(src_node->value_);
+    Node *current = head_;
+    src_node = src_node->next_;
+    // Traverse through the source set to copy element from
+    for (; src_node != nullptr; src_node = src_node->next_) {
+      current->next_ = new Node(src_node->value_);
+      current = current->next_;
+    }
+  }
+  size_ = src.size_;
+}
+
+template<typename ValueType>
+void Set<ValueType>::swap(const Set &rhs) {
+  std::swap(head_, rhs.head_);
+  std::swap(size_, rhs.size_);
 }
