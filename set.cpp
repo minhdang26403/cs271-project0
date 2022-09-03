@@ -1,4 +1,5 @@
 #include "set.h"
+using namespace std;
 
 template<typename ValueType>
 Set<ValueType>::~Set() {

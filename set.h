@@ -42,56 +42,56 @@ class Set {
 
   /** 
    * Precondition: None
-   * Postcondition: None
+   * Postcondition: Returns the cardinality of the set.
    */
   std::size_t cardinality() const { return size_; }
 
   /**
    * Precondition: None
-   * Postcondition: None
+   * Postcondition: Returns true if the set is empty and false otherwise.
    */
   bool empty() const { return size_ == 0; }
 
   /**
    * Precondition: None
-   * Postcondition: None
+   * Postcondition: Returns the head of the set.
    */
   Node *begin() const { return head_; }
 
   /**
    * Precondition: None
-   * Postcondition: None
+   * Postcondition: Returns true if the set contains the element x and false otherwise.
    */
   bool contains(const ValueType &x) const;
 
-  /**
-   * Precondition: None
+  /* == operator
+   * Precondition: this and other are Set objects.
    * Postcondition: None
    */
   bool operator==(const Set &other) const;
 
-  /**
-   * Precondition: None
+  /* <= operator
+   * Precondition: this and other are Set objects.
    * Postcondition: None
    */
   bool operator<=(const Set &other) const;
 
-  /**
-   * Precondition: None
+  /* + operator
+   * Precondition: this and t are Set objects.
    * Postcondition: a new set containing all elements from both set
    * is returned
    */
   Set<ValueType> operator+(const Set &t);
 
-  /**
-   * Precondition: None
+  /* & operator
+   * Precondition: this and t are Set objects
    * Postcondition: a new set containing elements that exist in both two sets
    * is returned
    */
   Set<ValueType> operator&(const Set &t);
 
-  /**
-   * Precondition: None
+  /* - operator
+   * Precondition: this and t are Set objects
    * Postcondition: a new set containing elements that are in set `s`
    * but not in set `t`
    */
@@ -99,7 +99,7 @@ class Set {
 
   /**
    * Precondition: None
-   * Postcondition: a string representation of the set
+   * Postcondition: Returns a string representation of the Set object.
    */
   std::string to_string();
 
