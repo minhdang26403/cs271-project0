@@ -205,252 +205,246 @@ void test_contains() {
 }
 
 void test_equality() {
-    try {
-        Set<int> s;
-        Set<int> t;
+  try {
+    Set<int> s;
+    Set<int> t;
 
-        // Two empty sets are equal
-        if(!(s==t)) {
-            std::cout << "Empty sets should be considered equal" << std::endl;
-        }
-        s.insert(4);
-        s.insert(5);
-        s.insert(6);
-        s.insert(7);
-        if(s==t) {
-            std::cout << "Incorrectly identified set " << s.to_string() << " as equivalent to " << t.to_string() << std::endl;
-        }
-
-        t.insert(7);
-        t.insert(6);
-        t.insert(5);
-        t.insert(4);
-        if(!(s==t)) {
-            std::cout << "Sets " << s.to_string() << " and " << t.to_string() << " should be considered equal." << std::endl;
-        }
-
-        // after removing an element from one set, it is no longer equal to the other set
-        s.remove(5);
-        if(s==t) {
-            std::cout << "Incorrectly identified set " << s.to_string() << " as equivalent to " << t.to_string() << std::endl;
-        }
-
-        // after removing the same element from both sets that are equal, the sets remain equal
-        t.remove(5);
-        if (!(s==t)) {
-            std::cout << "Sets " << s.to_string() << " and " << t.to_string() << " should be considered equal." << std::endl;
-        }
-
-        
-    } catch (std::exception &e) {
-        std::cerr << "Error in determining set equality : " << e.what() << std::endl;
+    // Two empty sets are equal
+    if(!(s==t)) {
+      std::cout << "Empty sets should be considered equal" << std::endl;
     }
+    s.insert(4);
+    s.insert(5);
+    s.insert(6);
+    s.insert(7);
+    if(s==t) {
+      std::cout << "Incorrectly identified set " << s.to_string() << " as equivalent to " << t.to_string() << std::endl;
+    }
+
+    t.insert(7);
+    t.insert(6);
+    t.insert(5);
+    t.insert(4);
+    if(!(s==t)) {
+      std::cout << "Sets " << s.to_string() << " and " << t.to_string() << " should be considered equal." << std::endl;
+    }
+
+    // after removing an element from one set, it is no longer equal to the other set
+    s.remove(5);
+    if(s==t) {
+      std::cout << "Incorrectly identified set " << s.to_string() << " as equivalent to " << t.to_string() << std::endl;
+    }
+
+    // after removing the same element from both sets that are equal, the sets remain equal
+    t.remove(5);
+    if (!(s==t)) {
+      std::cout << "Sets " << s.to_string() << " and " << t.to_string() << " should be considered equal." << std::endl;
+    }
+  } catch (std::exception &e) {
+    std::cerr << "Error in determining set equality : " << e.what() << std::endl;
+  }
 }
 
 void test_subset() {
-    try {
-        Set<int> s;
-        Set<int> t;
+  try {
+    Set<std::string> s;
+    Set<std::string> t;
 
-        // an empty set is a subset of an empty set
-        if(!(s<=t)) {
-            std::cout << "Set " << s.to_string() << " should be considered a subset of the set " << t.to_string() << std::endl;
-        }
-
-        t.insert(7);
-        t.insert(3);
-
-        // an empty set is a subset of all sets
-        if(!(s<=t)) {
-            std::cout << "Set " << s.to_string() << " should be considered a subset of the set " << t.to_string() << std::endl;
-        }
-
-        // Equal sets are subsets of each other
-        s.insert(3);
-        s.insert(7);
-        if(!(s<=t)) {
-            std::cout << "Set " << s.to_string() << " should be considered a subset of the set " << t.to_string() << std::endl;
-        }
-
-        t.insert(1);
-        if(!(s<=t)) {
-            std::cout << "Set " << s.to_string() << " should be considered a subset of the set " << t.to_string() << std::endl;
-        }
-
-        s.insert(9);
-        if(s<=t) {
-            std::cout << "Set " << s.to_string() << " should NOT be considered a subset of the set " << t.to_string() << std::endl;
-        }
-
-        s.remove(9);
-        s.remove(3);
-        if (!(s<=t)) {
-            std::cout << "Set " << s.to_string() << " should be considered a subset of the set " << t.to_string() << std::endl;
-        }
-
-        // the only subset of an empty set is another empty set
-        t.remove(1);
-        t.remove(7);
-        t.remove(3);
-        if ((s<=t)) {
-            std::cout << "Set " << s.to_string() << " should NOT be considered a subset of the set " << t.to_string() << std::endl;
-        }
-        
-    } catch (std::exception& e) {
-        std::cerr << "Error in determining subset : " << e.what() << std::endl;
+    // an empty set is a subset of an empty set
+    if(!(s<=t)) {
+      std::cout << "Set " << s.to_string() << " should be considered a subset of the set " << t.to_string() << std::endl;
     }
+
+    t.insert("abc");
+    t.insert("def");
+
+    // an empty set is a subset of all sets
+    if(!(s<=t)) {
+      std::cout << "Set " << s.to_string() << " should be considered a subset of the set " << t.to_string() << std::endl;
+    }
+
+    // Equal sets are subsets of each other
+    s.insert("def");
+    s.insert("abc");
+    if(!(s<=t)) {
+      std::cout << "Set " << s.to_string() << " should be considered a subset of the set " << t.to_string() << std::endl;
+    }
+
+    t.insert("ghi");
+    if(!(s<=t)) {
+      std::cout << "Set " << s.to_string() << " should be considered a subset of the set " << t.to_string() << std::endl;
+    }
+
+    s.insert("jkl");
+    if(s<=t) {
+      std::cout << "Set " << s.to_string() << " should NOT be considered a subset of the set " << t.to_string() << std::endl;
+    }
+
+    s.remove("jkl");
+    s.remove("def");
+    if (!(s<=t)) {
+      std::cout << "Set " << s.to_string() << " should be considered a subset of the set " << t.to_string() << std::endl;
+    }
+
+    // the only subset of an empty set is another empty set
+    t.remove("ghi");
+    t.remove("abc");
+    t.remove("def");
+    if ((s<=t)) {
+      std::cout << "Set " << s.to_string() << " should NOT be considered a subset of the set " << t.to_string() << std::endl;
+    }
+  } catch (std::exception& e) {
+    std::cerr << "Error in determining subset : " << e.what() << std::endl;
+  }
 }
 
 void test_union() {
-    try {
-        Set<int> s;
-        Set<int> t;
+  try {
+    Set<int> s;
+    Set<int> t;
 
-        // union of empty sets is an empty set
-        std::string set_str = (s+t).to_string();
-        if(set_str != "") {
-            std::cout << "Union of the empty sets should be the empty set. Instead got : " << set_str << std::endl;
-        }
-
-        s.insert(1);
-        t.insert(1);
-        set_str = (s+t).to_string();
-        if(set_str != "1") {
-            std::cout << "Union of " << s.to_string() << " and " << t.to_string() << " was expected to be 1 but instead got : " << set_str << std::endl;
-        }
-
-        t.insert(2);
-        t.insert(3);
-        set_str = (s+t).to_string();
-        if(set_str != "1 2 3") {
-            std::cout << "Union of " << s.to_string() << " and " << t.to_string() << " was expected to be 1 2 3 but instead got : " << set_str << std::endl;
-        }
-
-        s.insert(4);
-        s.insert(5);
-        set_str = (s+t).to_string();
-        if(set_str != "4 5 1 2 3") {
-            std::cout << "Union of " << s.to_string() << " and " << t.to_string() << " was expected to be 4 5 1 2 3 but instead got : " << set_str << std::endl;
-        }
-
-        s.remove(4);
-        s.remove(5);
-        t.remove(2);
-        t.remove(3);
-
-        s.insert(7);
-        t.insert(7);
-
-        // if two sets are equal, the union set is also equal
-        set_str = (s+t).to_string();
-        if(set_str != "1 7" && !(s==t)) {
-            std::cout << "Union of " << s.to_string() << " and " << t.to_string() << " was expected to be 1 7 but instead got : " << set_str << std::endl;
-        }
-
-    } catch (std::exception& e) {
-        std::cerr << "Error in generating the union set : " << e.what() << std::endl;
+    // union of empty sets is an empty set
+    std::string set_str = (s+t).to_string();
+    if(set_str != "") {
+      std::cout << "Union of the empty sets should be the empty set. Instead got : " << set_str << std::endl;
     }
+
+    s.insert(1);
+    t.insert(1);
+    set_str = (s+t).to_string();
+    if(set_str != "1") {
+      std::cout << "Union of " << s.to_string() << " and " << t.to_string() << " was expected to be 1 but instead got : " << set_str << std::endl;
+    }
+
+    t.insert(2);
+    t.insert(3);
+    set_str = (s+t).to_string();
+    if(set_str != "1 2 3") {
+      std::cout << "Union of " << s.to_string() << " and " << t.to_string() << " was expected to be 1 2 3 but instead got : " << set_str << std::endl;
+    }
+
+    s.insert(4);
+    s.insert(5);
+    set_str = (s+t).to_string();
+    if(set_str != "4 5 1 2 3") {
+      std::cout << "Union of " << s.to_string() << " and " << t.to_string() << " was expected to be 4 5 1 2 3 but instead got : " << set_str << std::endl;
+    }
+
+    s.remove(4);
+    s.remove(5);
+    t.remove(2);
+    t.remove(3);
+    s.insert(7);
+    t.insert(7);
+
+    // if two sets are equal, the union set is also equal
+    set_str = (s+t).to_string();
+    if(set_str != "1 7" && !(s==t)) {
+      std::cout << "Union of " << s.to_string() << " and " << t.to_string() << " was expected to be 1 7 but instead got : " << set_str << std::endl;
+    }
+  } catch (std::exception& e) {
+    std::cerr << "Error in generating the union set : " << e.what() << std::endl;
+  }
 }
 
 void test_intersection() {
-    try {
-        Set<int> s;
-        Set<int> t;
-        std::string set_str = (s&t).to_string();
+  try {
+    Set<char> s;
+    Set<char> t;
+    std::string set_str = (s&t).to_string();
 
-        // intersection of empty sets is an empty set
-        if(set_str != "") {
-            std::cout << "Intersection of the empty sets should be the empty set. Instead got : " << set_str << std::endl;
-        }
-
-        s.insert(7);
-        s.insert(8);
-        t.insert(9);
-
-        // if one of the sets is empty, then the intersection set is also empty
-        set_str = (s&t).to_string();
-        if(set_str != "") {
-            std::cout << "Intersection of " << s.to_string() << " and " << t.to_string() << " was expected to be the empty set but instead got : " << set_str << std::endl;
-        }
-
-        // if none of the elements from the two sets overlap, then the intersection set is empty
-        t.insert(5);
-        t.insert(6);
-        set_str = (s&t).to_string();
-        if(set_str != "") {
-            std::cout << "Intersection of " << s.to_string() << " and " << t.to_string() << " was expected to be the empty set but instead got : " << set_str << std::endl;
-        }
-
-        t.insert(8);
-        set_str = (s&t).to_string();
-        if(set_str != "8") {
-            std::cout << "Intersection of " << s.to_string() << " and " << t.to_string() << " was expected to be 8 but instead got : " << set_str << std::endl;
-        }
-
-        t.remove(5);
-        t.remove(6);
-        t.remove(9);
-        t.insert(7);
-        set_str = (s&t).to_string();
-
-        // if two sets are equal, the intersection set is also equal
-        if (!(s==t)) {
-            std::cout << "Sets " << s.to_string() << " and " << t.to_string() << " are not equal." << std::endl;
-        }
-
-        if(set_str != "7 8") {
-            std::cout << "Intersection of " << s.to_string() << " and " << t.to_string() << " was expected to be 7 8 9 but instead got : " << set_str << std::endl;
-        }
-
-    } catch (std::exception& e) {
-        std::cerr << "Error in generating the intersection set : " << e.what() << std::endl;
+    // intersection of empty sets is an empty set
+    if(set_str != "") {
+      std::cout << "Intersection of the empty sets should be the empty set. Instead got : " << set_str << std::endl;
     }
+
+    s.insert('7');
+    s.insert('8');
+    t.insert('9');
+
+    // if one of the sets is empty, then the intersection set is also empty
+    set_str = (s&t).to_string();
+    if(set_str != "") {
+      std::cout << "Intersection of " << s.to_string() << " and " << t.to_string() << " was expected to be the empty set but instead got : " << set_str << std::endl;
+    }
+
+    // if none of the elements from the two sets overlap, then the intersection set is empty
+    t.insert('5');
+    t.insert('6');
+    set_str = (s&t).to_string();
+    if(set_str != "") {
+      std::cout << "Intersection of " << s.to_string() << " and " << t.to_string() << " was expected to be the empty set but instead got : " << set_str << std::endl;
+    }
+
+    t.insert('8');
+    set_str = (s&t).to_string();
+    if(set_str != "8") {
+      std::cout << "Intersection of " << s.to_string() << " and " << t.to_string() << " was expected to be 8 but instead got : " << set_str << std::endl;
+    }
+
+    t.remove('5');
+    t.remove('6');
+    t.remove('9');
+    t.insert('7');
+    set_str = (s&t).to_string();
+
+    // if two sets are equal, the intersection set is also equal
+    if (!(s==t)) {
+      std::cout << "Sets " << s.to_string() << " and " << t.to_string() << " are not equal." << std::endl;
+    }
+
+    if(set_str != "7 8") {
+      std::cout << "Intersection of " << s.to_string() << " and " << t.to_string() << " was expected to be 7 8 9 but instead got : " << set_str << std::endl;
+    }
+  } catch (std::exception& e) {
+    std::cerr << "Error in generating the intersection set : " << e.what() << std::endl;
+  }
 }
 
 void test_diff() {
-    try {
-        Set<int> s;
-        Set<int> t;
-        std::string set_str = (s-t).to_string();
+  try {
+    Set<int> s;
+    Set<int> t;
+    std::string set_str = (s-t).to_string();
 
-        // difference of empty sets is an empty set
-        if(set_str != "") {
-            std::cout << "Difference of the empty sets should be the empty set. Instead got : " << set_str << std::endl;
-        }
-
-        s.insert(5);
-        s.insert(6);
-        set_str = (s-t).to_string();
-
-        // difference of a non-empty set and an empty set is just the non-empty set
-        if(set_str != "5 6") {
-            std::cout << "Set " << s.to_string() << " \\ Set " << t.to_string() << " was expected to be 5 6 set but instead got : " << set_str << std::endl;
-        }
-
-        // difference of an empty set and a non-empty set is an empty set
-        set_str = (t-s).to_string();
-        if (set_str != "") {
-            std::cout << "Set " << s.to_string() << " \\ Set " << t.to_string() << " was expected to be the empty set but instead got : " << set_str << std::endl;
-        }
-
-        // if the two sets are equal, their difference is an empty set
-        t.insert(6);
-        t.insert(5);
-        set_str = (s-t).to_string();
-        if(set_str != "") {
-            std::cout << "Set " << s.to_string() << " \\ Set " << t.to_string() << " was expected to be the empty set but instead got : " << set_str << std::endl;
-        }
-
-        s.insert(7);
-        s.insert(8);
-        set_str = (s-t).to_string();
-        if(set_str != "7 8") {
-            std::cout << "Set " << s.to_string() << " \\ Set " << t.to_string() << " was expected to be 7 8 set but instead got : " << set_str << std::endl;
-        }
-
-    } catch (std::exception& e) {
-        std::cerr << "Error in generating the intersection set : " << e.what() << std::endl;
+    // difference of empty sets is an empty set
+    if(set_str != "") {
+      std::cout << "Difference of the empty sets should be the empty set. Instead got : " << set_str << std::endl;
     }
+
+    s.insert(5);
+    s.insert(6);
+    set_str = (s-t).to_string();
+
+    // difference of a non-empty set and an empty set is just the non-empty set
+    if(set_str != "5 6") {
+      std::cout << "Set " << s.to_string() << " \\ Set " << t.to_string() << " was expected to be 5 6 set but instead got : " << set_str << std::endl;
+    }
+
+    // difference of an empty set and a non-empty set is an empty set
+    set_str = (t-s).to_string();
+    if (set_str != "") {
+      std::cout << "Set " << s.to_string() << " \\ Set " << t.to_string() << " was expected to be the empty set but instead got : " << set_str << std::endl;
+    }
+
+    // if the two sets are equal, their difference is an empty set
+    t.insert(6);
+    t.insert(5);
+    set_str = (s-t).to_string();
+    if(set_str != "") {
+      std::cout << "Set " << s.to_string() << " \\ Set " << t.to_string() << " was expected to be the empty set but instead got : " << set_str << std::endl;
+    }
+
+    s.insert(7);
+    s.insert(8);
+    set_str = (s-t).to_string();
+    if(set_str != "7 8") {
+      std::cout << "Set " << s.to_string() << " \\ Set " << t.to_string() << " was expected to be 7 8 set but instead got : " << set_str << std::endl;
+    }
+
+  } catch (std::exception& e) {
+    std::cerr << "Error in generating the intersection set : " << e.what() << std::endl;
+  }
 }
 
 int main() {
