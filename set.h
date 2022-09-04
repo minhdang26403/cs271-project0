@@ -99,13 +99,13 @@ class Set {
 
   /* <= operator
    * Precondition: `this` and `t` are Set objects.
-   * Postcondition: returns true if `t` is a subset of `t`; otherwise, returns false
+   * Postcondition: returns true if `this` is a subset of `t`; otherwise, returns false
    */
   bool operator<=(const Set &t) const;
 
   /* + operator (union operator)
    * Precondition: `this` and `t` are Set objects.
-   * Postcondition: returns a new set containing all elements from both set
+   * Postcondition: returns a new set containing all elements from both sets
    */
   Set<ValueType> operator+(const Set &t);
 
@@ -131,7 +131,7 @@ class Set {
  private:
   /**
    * Precondition: `src` is a source Set object to copy from
-   * Postcondition: Creates a deep copy of the source Set object
+   * Postcondition: creates a deep copy of the source Set object
    */
   void deep_copy(const Set& src);
 

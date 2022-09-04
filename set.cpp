@@ -19,6 +19,7 @@ Set<ValueType>::~Set() {
 
 template<typename ValueType>
 Set<ValueType>& Set<ValueType>::operator=(const Set &src) {
+  // Copy and swap idiom
   Set copy(src);
   copy.swap(*this);
   return *this;
@@ -151,6 +152,7 @@ Set<ValueType> Set<ValueType>::operator-(const Set &t) {
 template<typename ValueType>
 std::string Set<ValueType>::to_string() {
   Node *current = head_;
+  // Empty set
   if (current == nullptr) {
     return "";
   }
@@ -171,11 +173,13 @@ void Set<ValueType>::deep_copy(const Set &src) {
     // The source set is empty
     head_ = nullptr;
   } else {
+    // Create the head of the linked list first
     Node *src_node = src.head_;
     head_ = new Node(src_node->value_);
+
+    // Traverse through the source set to copy element from
     Node *current = head_;
     src_node = src_node->next_;
-    // Traverse through the source set to copy element from
     for (; src_node != nullptr; src_node = src_node->next_) {
       current->next_ = new Node(src_node->value_);
       current = current->next_;
