@@ -2,13 +2,14 @@
 
 #include <iostream>
 
-std::string sliding_window(int arr[], int len, int k) {
+template<typename T>
+std::string sliding_window(T arr[], int len, int k) {
   if (len == 0) {
     return "";
   }
-  MinQueue<int> mq;
-  std::unordered_map<int,int> index_map;
-  int min_value = INT_MAX;
+  MinQueue<T> mq;
+  std::unordered_map<T,int> index_map;
+  T min_value = arr[0];
   // First, finds the minimum value in the window of size k
   // and maps the value to its index
   for (int i = 0; i < k; ++i) {
@@ -18,7 +19,7 @@ std::string sliding_window(int arr[], int len, int k) {
     mq.insert(arr[i]);
     index_map[arr[i]] = i;
   }
-  std::vector<int> result;
+  std::vector<T> result;
   result.push_back(min_value);
   // Moves the window of size k by one step at each iteration
   for (int end = k; end < len; ++end) {
@@ -31,7 +32,7 @@ std::string sliding_window(int arr[], int len, int k) {
       mq.extract_min();
       // The heap is empty, so let min_value be a default value
       if (mq.empty()) {
-        min_value = INT_MAX;
+        min_value = arr[end];
         break;
       }
       min_value = mq.min();

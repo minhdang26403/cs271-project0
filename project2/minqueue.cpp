@@ -47,7 +47,7 @@ KeyType MinQueue<KeyType>::extract_min() {
 template<typename KeyType>
 void MinQueue<KeyType>::decrease_key(int i, const KeyType &k) {
   // Input validation
-  if (i < 0 || i > data_.size()) {
+  if (i < 0 || i >= data_.size()) {
     return;
   }
   if (k >= data_[i]) {
