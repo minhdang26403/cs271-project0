@@ -330,6 +330,7 @@ void test_heapsort() {
     for(int i = 0; i < 10; i++){
       int_data[i] = 10-i;
     }
+
     MinQueue<int> heap_i(int_data, 10);
     heap_i.sort(int_data);
     string sorted_str2 = to_string(int_data[0]);
@@ -340,7 +341,7 @@ void test_heapsort() {
       cout << "Incorrect heapsort result. Expected 1 2 3 4 5 6 7 8 9 10 but got : " << sorted_str << endl;
     }
 
-      // works correctly with objects with different data types
+    // works correctly with objects with different data types
     char* char_data = new char[4];
     char_data[0] = 'd';
     char_data[1] = 'c';

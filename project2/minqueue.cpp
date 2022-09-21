@@ -50,9 +50,6 @@ void MinQueue<KeyType>::decrease_key(int i, const KeyType &k) {
   if (i < 0 || i > data_.size()) {
     return;
   }
-  if (data_.empty()) {
-    return;
-  }
   if (k >= data_[i]) {
     return;
   }
@@ -122,7 +119,7 @@ void MinQueue<KeyType>::sift_up(int i) {
 template<typename KeyType>
 void MinQueue<KeyType>::build_min_heap() {
   int n = data_.size();
-  // data[n/2...data.length] are all leaves, thus trivial min-heaps.
+  // data_[n/2...data.length] are all leaves, thus trivial min-heaps.
   // Iterates in descending order to corrects the min-heap property with
   // assumption that left(i) and right(i) are min-heaps
   for (int i = n / 2 - 1; i > -1; --i) {
@@ -143,6 +140,8 @@ void MinQueue<KeyType>::heapsort(KeyType *A) {
     heapify(0);
   }
   A[n - 1] = data_[0];
-  // Reserve the initial heap size
+  // Preserve the initial heap size
   heap_size_ = data_.size();
+  // Preserve the min-heap property since `data_` is sorted in descending order
+  build_min_heap();
 }

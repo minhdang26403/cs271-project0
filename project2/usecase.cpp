@@ -25,7 +25,7 @@ std::string sliding_window(int arr[], int len, int k) {
     // the start index of the current window
     int start = end - k + 1;
     // At each iteration, check if the current min value is out of the window
-    // by using index map (if its index < start index of the window). If true,
+    // by using the index map (if its index < start index of the window). If true,
     // we find a new min value in the window by extracting the root of the min-heap
     while (index_map[min_value] < start) {
       mq.extract_min();
@@ -41,11 +41,12 @@ std::string sliding_window(int arr[], int len, int k) {
       min_value = arr[end];
     }
 
-    // Inserts value into the min queue and performs index map
+    // Inserts value into the min queue and maps the value to its index
     mq.insert(arr[end]);
     index_map[arr[end]] = end;
     result.push_back(min_value);
   }
+  // Print the result
   std::stringstream ss;
   int n = result.size();
   for (int i = 0; i < n - 1; ++i) {

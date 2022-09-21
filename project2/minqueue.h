@@ -7,7 +7,6 @@
 #include <unordered_map>
 #include <vector>
 
-
 template<typename KeyType>
 class MinQueue {
  public:
@@ -22,7 +21,7 @@ class MinQueue {
    * Custom Constructor
    * Precondition: `A` is a pointer to an array and `n` is
    * the size of that array
-   * Postcondition: creates a MinQueue object whose elements
+   * Postcondition: creates a new MinQueue object whose elements
    * are elements of the array `A`
    */
   MinQueue(KeyType *A, int n);
@@ -67,10 +66,10 @@ class MinQueue {
   void decrease_key(int i, const KeyType &k);
 
   /**
-   * Sorts the elements of the priority queue and stores them in the `data` array
+   * Sorts the elements of the priority queue and stores them in the array `data`
    * Precondition: the priority queue satisfies the min-heap property
-   * Postcondition: the `data_` array of the priority queue and `data` array is
-   * sorted in ascending order
+   * Postcondition: the array `data_` of the priority queue is sorted in descending order
+   * and array `A` is sorted in ascending order
    */
   void sort(KeyType *data);
 
@@ -118,19 +117,19 @@ class MinQueue {
 
   /**
    * Precondition: None
-   * Postcondition: the `data_` vector satisfies the min-heap property
+   * Postcondition: the vector `data_` satisfies the min-heap property
    */
   void build_min_heap();
 
   /**
-   * Sorts the elements of the priority queue and stores them in the `A` array
+   * Sorts the elements of the priority queue and stores them in the array `A`
    * Precondition: the priority queue satisfies the min-heap property
-   * Postcondition: the `data_` array of the priority queue and `A` array is
-   * sorted in ascending order
+   * Postcondition: the array `data_` of the priority queue is sorted in descending order
+   * and array `A` is sorted in ascending order
    */
   void heapsort(KeyType *A);
 
-  // The `data_` vector storing heap elements
+  // The vector `data_` storing heap elements
   std::vector<KeyType> data_;
   // The current heap size (different from `data_` size)
   int heap_size_{0};
